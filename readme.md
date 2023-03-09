@@ -3,7 +3,7 @@
 ### Exercice 5
 
 **a**. Récupérer l’image sur le Docker Hub :  
-``docker pull nginx`
+`docker pull nginx`
 
 **b**. Vérifier que cette image est présente en local :  
 `docker images | grep nginx`
@@ -36,10 +36,12 @@ docker run)
 
 **c**. Quelles différences observez-vous entre les procédures 5. et 6. ?
 
+```
 Le but de ces exercices et d'exécuter un serveur web dans un conteneur Docker.
 
-Dans l'exercice 5, il n'est pas demandé de créer un Dockerfile, donc de créer une image personnalisé à partir de l'image de nginx.  
+Dans l'exercice 5, il n'est pas demandé de créer un Dockerfile, donc de créer une image personnalisé à partir de l'image de nginx.
 Cela implique de devoir rajouter des étapes comme la copie du fichier html dans le conteneur ou d'utiliser des volumes.
 
-Dans cet exercice, il est demandé de créer un Dockerfile, donc de créer une image personnalisé à partir de l'image de nginx.  
+Dans cet exercice, il est demandé de créer un Dockerfile, donc de créer une image personnalisé à partir de l'image de nginx.
 Cela n'implique pas d'étapes supplémentaires, car j'ai inclus la copie des fichiers dans l'image personnalisé.
+```
