@@ -14,6 +14,9 @@
 **d**. Démarrer un conteneur et servir la page html créée précédemment à l’aide d’un volume :  
 `docker run --name my_nginx -p 8080:80 -v ${PWD}/index.html:/usr/share/nginx/html/index.html -d nginx`
 
+--name : nom du conteneur
+-p : port
+
 **e**. Supprimer le conteneur précédent et arriver au même résultat que précédemment à l’aide de la commande docker cp  
 `docker container rm -f my_nginx`  
 `docker run -p 8080:80 --name my_nginx -d nginx`  
@@ -45,3 +48,12 @@ Cela implique de devoir rajouter des étapes comme la copie du fichier html dans
 Dans cet exercice, il est demandé de créer un Dockerfile, donc de créer une image personnalisé à partir de l'image de nginx.
 Cela n'implique pas d'étapes supplémentaires, car j'ai inclus la copie des fichiers dans l'image personnalisé.
 ```
+
+### Exercice 7
+
+**a**. Récupérer les images mysql:5.7 et phpmyadmin/phpmyadmin depuis le Docker Hub
+`docker pull mysql:5.7`
+`docker pull  phpmyadmin/phpmyadmin`
+
+**b**. Exécuter deux conteneurs à partir des images et ajouter une table ainsi que quelques enregistrements dans la base de données à l’aide de phpmyadmin  
+![alt text](./docker-db-insert.png)
