@@ -53,7 +53,7 @@ Cela n'implique pas d'étapes supplémentaires, car j'ai inclus la copie des fic
 ### Exercice 7
 
 **a**. Récupérer les images mysql:5.7 et phpmyadmin/phpmyadmin depuis le Docker Hub  
-`docker pull mysql:5.7`
+`docker pull mysql:5.7`  
 `docker pull  phpmyadmin/phpmyadmin`
 
 **b**. Exécuter deux conteneurs à partir des images et ajouter une table ainsi que quelques enregistrements dans la base de données à l’aide de phpmyadmin  
