@@ -103,3 +103,4 @@ INSERT INTO 'Table' ('name') VALUES ('test4');
 ```
 
 `Lors du premier lancement du conteneur, les fichiers de scripts (.sql) se trouvant dans : /docker-entrypoint-initdb.d. seront exécutés automatiquement.`
+![alt text](./createTableAndInsert.png)
