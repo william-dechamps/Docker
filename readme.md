@@ -60,3 +60,46 @@ Cela n'implique pas d'étapes supplémentaires, car j'ai inclus la copie des fic
 `docker run --name mysql -e MYSQL_ROOT_PASSWORD=test -d mysql:5.7`  
 `docker run --name phpmyadmin -d --link mysql:db -p 8080:80 phpmyadmin/phpmyadmin`  
 ![alt text](./docker-db-insert.png)
+
+### Exercice 8
+
+**a**. Qu’apporte le fichier docker-compose par rapport aux commandes docker run ? Pourquoi est-il intéressant ? (cf. ce qui a été présenté pendant le cours)
+
+`touch docker-compose.yml`
+
+```
+services:
+  db:
+    container_name: mysql
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+    volumes:
+      - ./createTableAndInsert.sql:/docker-entrypoint-initdb.d/createTableAndInsert.sql
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - db
+    ports:
+      - 8080:80
+```
+
+```
+Le fichier docker-compose permet la création d'une configuration pour plusieurs conteneurs, alors que la commande run permet d'executer qu'un seul conteneur.
+```
+
+**b**. Quel moyen permet de configurer (premier utilisateur, première base de données, mot de passe root, ...) facilement le conteneur mysql au lancement ?  
+`touch createTableAndInsert.db`
+
+```
+CREATE DATABASE DockerTable;
+USE DockerTable;
+CREATE TABLE Table ('name' varchar(255));
+INSERT INTO 'Table' ('name') VALUES ('test1');
+INSERT INTO 'Table' ('name') VALUES ('test2');
+INSERT INTO 'Table' ('name') VALUES ('test3');
+INSERT INTO 'Table' ('name') VALUES ('test4');
+```
+
+`Lors du premier lancement du conteneur, les fichiers de scripts (.sql) se trouvant dans : /docker-entrypoint-initdb.d. seront exécutés automatiquement.`
