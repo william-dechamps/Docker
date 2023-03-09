@@ -102,5 +102,60 @@ INSERT INTO 'Table' ('name') VALUES ('test3');
 INSERT INTO 'Table' ('name') VALUES ('test4');
 ```
 
-`Lors du premier lancement du conteneur, les fichiers de scripts (.sql) se trouvant dans : /docker-entrypoint-initdb.d. seront exécutés automatiquement.`
+```
+Lors du premier lancement du conteneur, les fichiers de scripts (.sql) se trouvant dans : /docker-entrypoint-initdb.d. seront exécutés automatiquement.
+```
+
 ![alt text](./createTableAndInsert.png)
+
+### Exercice 9
+
+**a**. A l’aide de docker-compose et de l’image praqma/network-multitool disponible sur le Docker Hub créer 3 services (web, app et db) et 2 réseaux (frontend et backend).
+Les services web et db ne devront pas pouvoir effectuer de ping de l’un vers l’autre
+
+```
+services:
+  web:
+    container_name: web
+    image: nginx:latest
+    ports:
+      - 8080:80
+    volumes:
+      - ./web:/usr/share/nginx/html
+    networks:
+      - frontend
+
+  app:
+    container_name: app
+    image: nginx:latest
+    ports:
+      - 8081:80
+    volumes:
+      - ./app:/usr/share/nginx/html
+    networks:
+      - frontend
+      - backend
+
+  db:
+    container_name: db
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+    networks:
+      - backend
+
+networks:
+  frontend:
+    name: frontend
+  backend:
+    name: backend
+```
+
+**b**. Quelles lignes du résultat de la commande docker inspect justifient ce comportement ?
+
+**c**. Dans quelle situation réelles (avec quelles images) pourrait-on avoir cette configuration réseau ? Dans quel but ?
+
+```
+Cette configuration réseau peut être utilisée dans le cas où nous avons : un frontend, une api et une base de données.
+On voudrait éviter que le frontend puisse accéder à la base de données, mais par contre on veut que l'api et le frontend puisse communiquer entre-eux et que l'api puisse communiquer avec la base de données.
+```
